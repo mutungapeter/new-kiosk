@@ -1,0 +1,93 @@
+{% extends 'includes/dashboard_nav.html' %}
+{% block content %}
+
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-conten padding-y bg">
+{% include 'includes/alerts.html' %}
+    <div class="container">
+        <div class="row mb-4">
+
+        {% if user.is_authenticated and user.is_active and not user.is_admin and not user.is_superadmin %}
+        <main class="col-md-12">
+            <article class="card">
+              <!-- Zero configuration table -->
+              <section id="basic-datatable">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Recent Orders and All Orders</h4>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-body card-dashboard">
+                                    <p class="card-text">You can as well click on the order number to view order in detail</p>
+                                    <div class="table-responsive">
+                                        <table class="table zero-configuration">
+                                          <thead>
+                                            <tr>
+                                              <th scope="col">Order #</th>
+                                              <th scope="col">Billing Name</th>
+                                              <th scope="col">Phone</th>
+                                              <th scope="col">Order Total</th>
+                                              <th scope="col">Payment Status</th>
+                                              <th scope="col">Order Status</th>
+                                              <th scope="col">Export To PDF</th>
+                                              <th scope="col">Date</th>
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                              {% for order in orders %}
+                                            <tr>
+                                              <th scope="row"><a href="{% url 'order_detail' order.order_number %}">{{order.order_number}}</a></th>
+                                              <td>{{order.full_name}}</td>
+                                              <td>{{order.phone}}</td>
+                                              <td>Ksh {{order.order_total}}</td>
+                                              <td><span class="badge badge-success badge-pill p-2">{{order.payment.status}}</span></td>
+                                              {% if order.status == "Received" %}
+                                              <td> <span class="badge badge-primary badge-pill p-2">{{ order.status }}</span></td>
+                                              {% elif order.status == "Completed" %}
+                                              <td>  <span class="badge badge-success badge-pill p-2">{{ order.status }}</span></td>
+                                              {% elif order.status == "Dispatched" %}
+                                              <td>  <span class="badge badge-warning badge-pill p-2">{{ order.status }}</span></td>
+                                              {% else %}
+                                              <td>  <span class="badge badge-secondary badge-pill p-2">{{ order.status }}</span></td>
+                                              {% endif %}
+                                              <td><a href="{% url 'generate_pdf' order.order_number %}" class="btn btn-sm btn-primary" style="width:140px;">Download as PDF</a></td>
+
+                                              <td>{{order.created_at}}</td>
+                                            </tr>
+                                            {% endfor %}
+                                            
+                                          </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th>Order  Number</th>
+                                                    <th>Billing Name</th>
+                                                    <th>Phone</th>
+                                                    <th>Order Total</th>
+                                                    <th>Payment Status</th>
+                                                    <th>Order date</th>
+                                                    
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            </article> <!-- order-group.// --> 
+        </main>
+        {% endif %}
+    </div> <!-- row.// -->
+    </div>
+    
+    
+    </section>
+    <!-- ========================= SECTION CONTENT END// ========================= -->
+
+  
+{% endblock %}

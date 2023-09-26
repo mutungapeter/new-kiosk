@@ -1,0 +1,83 @@
+{% extends 'includes/dashboard_nav.html' %}
+
+{% block content %}
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-conten padding-y bg">
+{% include 'includes/alerts.html' %}
+    <div class="container">
+        <div class="row mb-4">
+        <main class="col-md-12">
+            <article class="card">
+           
+              <!-- Zero configuration table -->
+              <section id="basic-datatable">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">All Payments</h4>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-body card-dashboard">
+                                    <p class="card-text"></p>
+                                    <div class="table-responsive">
+                                        <table class="table zero-configuration">
+                                          <thead>
+                                            <tr>
+                                            <th scope="col">No.</th>
+                                            <th scope="col">User</th>
+                                            <th scope="col">Payment ID</th>
+                                            <th scope="col">Payment Method</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Payment Date</th>
+                                        
+                                            
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                            {% for object in payments %}
+
+                                            <tr>
+                                                <td>{{ forloop.counter }}</td>
+                                                <td>{{ object.user.full_name}}</td>
+                                                <td>{{object.payment.payment_id}}</td>
+                                                <td>{{object.payment.payment_method}}</td>
+                                                <td><span class="badge badge-success badge-pill">{{object.payment.status}}</span></td>
+                                                <td>{{object.created_at}}</td>
+                                                {% comment %} <td><span class="badge badge-success badge-pill">{{object.order.payment.status}}</span></td> {% endcomment %}
+                                              </tr>
+                                            {% endfor %}
+                                            
+                                          </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th>No.</th>
+                                                    <th >User</th>
+                                                    <th >Payment ID</th>
+                                                    <th >Payment Method</th>
+                                                    <th >Status</th>
+                                                    <th >Payment Date</th>
+                                                    
+                                                    
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            </article> <!-- order-group.// --> 
+        </main>
+    </div> <!-- row.// -->
+    </div>
+    
+    
+    </section>
+    <!-- ========================= SECTION CONTENT END// ========================= -->
+
+  
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends 'includes/dashboard_nav.html' %}
+
+{% block content %}
+{% comment %} {% include 'includes/navbar.html' %} {% endcomment %}
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-conten padding-y bg">
+{% include 'includes/alerts.html' %}
+    <div class="container">
+        <div class="row mb-4">
+        {% comment %} {% include 'includes/dashboard_sidebar.html' %} {% endcomment %}
+        <main class="col-md-12">
+            <article class="card">
+              <!-- Zero configuration table -->
+              <section id="basic-datatable">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">All Ordered Products</h4>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-body card-dashboard">
+                                    <p class="card-text"></p>
+                                    <div class="table-responsive">
+                                        <table class="table zero-configuration">
+                                          <thead>
+                                            <tr>
+                                            <th scope="col">No.</th>
+                                            <th scope="col">user</th>
+                                            <th scope="col">product</th>
+                                            <th scope="col">quantity</th>
+                                            <th scope="col">product_price</th>
+                                            <th scope="col">ordered</th>
+                                            <th scope="col">payment</th>
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                            {% for object in ordered_products %}
+
+                                            <tr>
+                                                <td>{{ forloop.counter }}</td>
+                                                <td>{{object.user.full_name}}</td>
+                                                <td>{{object.product}}</td>
+                                                <td>{{object.quantity}}</td>
+                                                <td>ksh  {{object.product_price}}</td>
+                                                <td>{{object.ordered}}</td>
+                                                <td><span class="badge badge-success badge-pill">{{object.order.payment.status}}</span></td>
+                                              </tr>
+                                            {% endfor %}
+                                            
+                                          </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th >No.</th>
+                                                    <th >payment</th>
+                                                    <th >user</th>
+                                                    <th >product</th>
+                                                    <th >quantity</th>
+                                                    <th >product_price</th>
+                                                    <th >ordered</th>
+                                                    
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            </article> <!-- order-group.// --> 
+        </main>
+    </div> <!-- row.// -->
+    </div>
+    
+    
+    </section>
+    <!-- ========================= SECTION CONTENT END// ========================= -->
+
+  
+{% endblock %}

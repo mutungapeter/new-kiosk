@@ -1,0 +1,155 @@
+{% extends 'includes/dashboard_nav.html' %}
+
+{% block content %}
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-conten padding-y bg">
+{% include 'includes/alerts.html' %}
+    <div class="container">
+        <div class="row">
+        <main class="col-md-9">
+            <article class="card">
+      <div class="content-wrapper">
+          <div class="content-body">
+              <section class="row flexbox-container">
+                  <div class="col-md-12 d-flex justify-content-center">
+                      <div class="card bg-authentication rounded-0 mb-3 w-100">
+                          <div class="row m-0">
+                            
+                              <div class="col-md-12 p-0">
+                                  <div class="card rounded-0 mb-0 px-2">
+                                      <div class="card-header pb-1">
+                                          <div class="card-title">
+                                              <h4 class="mb-0">Add Product</h4>
+                                          </div>
+                                      </div>
+                                      <p class="px-2">.</p>
+                                    <div class="card-content">
+                                        <div class="card-body pt-1 ">
+                                            <form action="{% url 'add_product' %}" method="POST" enctype="multipart/form-data">
+                                                {% csrf_token %}
+                                                <div class="row">
+                                                    <div class="col-md-6 col-12">
+                                                <label for="product name">Product Name </label>
+                                                <fieldset class="form-label-group">
+                                                    <input type="text" name="product_name" placeholder="Product Name" class="form-control" required>
+                                                </fieldset>
+                                               </div>
+                                               
+                                              <div class="col-md-6 col-12">
+                                                <label for="slug">Slug</label>
+                                                <fieldset class="form-label-group">
+                                                    <input type="text" name="slug" placeholder="Slug" class="form-control" required
+                                                        value="{{ form.initial.slug }}">
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-md-6 col-12">
+                                                <label for="">Description</label>
+                                                <fieldset class="form-label-group">
+                                                    <input type="text" name="description" placeholder="Description" class="form-control" required>
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-md-6 col-12">
+                                                <label for="slug">Price</label>
+                                                <fieldset class="form-label-group">
+                                                    <input type="text" name="price" placeholder="Price" class="form-control" required
+                                                        value="{{ form.initial.slug }}">
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-md-6 col-12">
+                                                <label for="id_stock">Stock</label>
+                                                <fieldset class="form-label-group">
+                                                    <input type="number" name="stock" placeholder="Stock" class="form-control" required>
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-md-6 col-12">
+                                                <label for="id_category">Category</label>
+                                                <fieldset class="form-label-group">
+                                                    <select name="category" class="form-control" required>
+                                                        <option value="" selected disabled>Choose a category</option>
+                                                        {% for category in form.fields.category.choices %}
+                                                        <option value="{{ category.0 }}">{{ category.1 }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-md-6 col-12">
+                                                <label class="form-check-label text-dark" for="id_is_available">Is Available</label>
+                                                <div class="form-group">
+                                                    <div class="form-check">
+                                                        <input type="checkbox" name="is_available" class="form-check-input" id="id_is_available" checked>
+                                    
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-12">
+                                                <label for="">Product image</label>
+                                                <fieldset class="form-label-group mt-2">
+                                                    <input type="file" name="images" placeholder="Category Image" class="form-control" required>
+                                    
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-md-6 col-12">
+                                                <label for="">Gallery Images</label>
+                                                <fieldset class="form-label-group">
+                                                    <input type="file" name="gallery_images" class="form-control" multiple required>
+                                    
+                                                </fieldset>
+                                            </div>
+                                              </div>
+                                                <div class="row pt-2">
+                                                    <div class="col-12 col-md-12 mb-1">
+                                                        <button type="submit" class="btn btn-primary btn-block ">Add Product</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            {{ form.errors }}
+                                        </div>
+                                    </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </section>
+
+          </div>
+      </div>
+            </article>
+            <script>
+                // Function to generate a slug from the given string
+                function generateSlug(text) {
+                    return text
+                        .toLowerCase()
+                        .replace(/ /g, '-') // Replace spaces with hyphens
+                        .replace(/[^\w-]+/g, '') // Remove non-word characters
+                        .replace(/--+/g, '-'); // Replace multiple hyphens with a single hyphen
+                }
+            
+                // Function to update the slug field based on the product name field
+                function updateSlug() {
+                    const productNameField = document.querySelector('input[name="product_name"]');
+                    const slugField = document.querySelector('input[name="slug"]');
+            
+                    const productName = productNameField.value;
+                    const slug = generateSlug(productName);
+            
+                    slugField.value = slug;
+                }
+            
+                // Event listener to trigger the updateSlug function when the product name field changes
+                const productNameField = document.querySelector('input[name="product_name"]');
+                productNameField.addEventListener('input', updateSlug);
+            </script>
+             
+        </main>
+    </div>
+    </div>
+    
+    
+    </section>
+    <!-- ========================= SECTION CONTENT END// ========================= -->
+    
+
+  
+{% endblock %}

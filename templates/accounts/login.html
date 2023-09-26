@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- ========================= SECTION CONTENT ========================= -->
+
+          <div class="content-wrapper">
+              <div class="content-body body mt-5">
+                <!-- <div style="display: flex; align-items: center; justify-content: center;">
+                    <div class="img">
+                        <a href="{% url 'home' %}">
+                            <img src="{% static 'images/kejani2.png' %}" alt="logo" style="width: 200px; height: 200px;">
+                        </a>
+                    </div>
+                </div>
+                 -->
+                  <section class="row flexbox-container row">
+                      <div class="col-xl-12 col-11 d-flex justify-content-center" >
+                          
+                          <div class="card bg-authentication rounded-0 mb-5" >
+                              <div class="col-lg-12 col-12 p-0">
+                                  
+                                   
+                                   {% if request.GET.command == 'verification' %}
+                                   <div class="container max-auto alert alert-blue text-center" role="alert" style="max-width: 1000px; margin-top:100px;">
+                                     Thank you for registering with us. We have have sent a verification email to your email address[{{request.GET.email}}].Please Verify it.
+                                     <br></br>
+                                     Already verified? <a href="{% url 'login' %}">Login</a>
+                                   </div>
+                                   
+                                   {% else %}
+                                      <div class="card rounded-0 mb-0 px-2"style="height: 500px;" >
+                                          <div class="card-header pb-1">
+                                              <div class="card-title">
+                                               <h4 class="mb-0 text-center" >FURNITURE SHOP</h4>
+                                              </div>
+                                          </div>
+                                          <p class="px-2">Welcome back  please login to your account.</p>
+  
+                                                  <div class="card-content">
+                                                      <div class="card-body pt-1" style="height: 390px;">
+                                                        {% include 'includes/alerts.html' %}
+                                                          <form  action="{% url 'login' %}" method="POST">
+                                                            {% csrf_token %}
+                                                            <label for="email">Email</label>
+                                                              <fieldset
+                                                                  class="form-label-group form-group position-relative mt-2 mb-1">
+                                                                  <input type="text" class="form-control" name="email"
+                                                                      id="" placeholder="email" required>
+  
+                                                                  
+                                                              </fieldset>
+                                                              <label for="user-password">Password</label>
+                                                              <fieldset class="form-label-group position-relative mt-4">
+                                                                  <input type="password" class="form-control"
+                                                                      name="password" id=""
+                                                                      placeholder="Password" required>
+  
+                                                                  
+                                                              </fieldset>
+                                                              <div
+                                                                  class="form-group d-flex justify-content-between align-items-center">
+                                                                  <div class="text-left">
+                                                               <div class="text-right"><p class="text-center ">New to Online Furniture shop? <a href="{% url 'register' %}">Create Account</a></p></div>
+                                                              </div>
+                                                                  <div class="text-left" style="margin-left: 50px;"> <a href="{% url 'forgotPassword' %}" class="float-right">Forgot password?</a>
+                                                                      </div>
+                                                                    
+                                                              </div>
+                                                                 <button type="submit"
+                                                                  class="btn btn-primary  btn-block text-center float-right btn-inline">Login</button>
+  
+                                                              
+                                                          </form>
+                                                      </div>
+                                                  </div>
+                                                  
+                                          <!-- <div class="login-footer">
+                                              
+                                          </div> -->
+                                      </div>
+                                      {% endif %}
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+  
+  
+  
+  
+  
+  
+                  </section>
+  
+              </div>
+          </div>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+
+    {% endblock %}

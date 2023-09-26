@@ -1,0 +1,26 @@
+<footer class="section-footer border-top">
+	<div class="container">
+		<section class="footer-bottom border-top row">
+			<div class="col-md-2">
+				<p class="text-primary">  Online Cafe</p>
+			</div>
+			<div class="col-md-8 text-md-center">
+				<span  class="px-2 text-primary">info@onlinecafe.co.ke</span>
+				<span  class="px-2">+254712345678</span>
+				<span  class="px-2">Lurambi , kakamega kenya</span>
+			</div>
+			
+		</section>
+	</div><!-- //container -->
+</footer>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script>
+	$(document).ready(function(){
+		$('.thumb a').click(function(e){
+			e.preventDefault();
+			$('.mainImage img').attr('src', $(this).attr("href"));
+		})
+	})
+</script>
+</body>
+</html>
